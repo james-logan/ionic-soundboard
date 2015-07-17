@@ -10,19 +10,35 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-  document.addEventListener("deviceready", onDeviceReady, false);
 
-  function onDeviceReady() {
 
-    console.log("sounds loaded");
+  // MASTER ARRAY OF ALL THE SOUNDS:
+  var soundArr = [["assets/legend-of-zelda-orarina-of-time-opening-a-large-treasure-chest.mp3", "assets/ocarina-of-time-24-enter-zelda.mp3", "assets/zelda-chest.mp3", "assets/zelda_theme_snes-cut-mp3.mp3"]]
+
+
+
+
+
+
+  //JAMES'S CODE FOR THE RANDOM BUTTON
+  $scope.randomGrabber = function (array) {
+    var firstIndex = Math.floor(Math.random() * array.length)
+    var secondIndex = Math.floor(Math.random() * array[firstIndex].length)
+
+    return array[firstIndex][secondIndex];
   }
 
-  var media = new Media("img/GameOfThrones.m4r");
+  $scope.assignSound = function () {
+    $scope.randoms = $scope.randomGrabber(soundArr);
+    $scope.media = new Media($scope.randoms);
+  }
+
+  $scope.assignSound()
+
 
   $scope.playSound = function () {
-    // navigator.notification.beep(2);
-    media.play();
-    console.log("should have played media");
+    $scope.media.play();
+    $scope.assignSound();
   }
 })
 
