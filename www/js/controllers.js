@@ -10,11 +10,20 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  document.addEventListener("deviceready", onDeviceReady, false);
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+  function onDeviceReady() {
+
+    console.log("sounds loaded");
+  }
+
+  var media = new Media("img/GameOfThrones.m4r");
+
+  $scope.playSound = function () {
+    // navigator.notification.beep(2);
+    media.play();
+    console.log("should have played media");
+  }
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
